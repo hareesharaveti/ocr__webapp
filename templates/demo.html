@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+<style>
+    .selection-box { height: 70vh; background: #000; border: 2px solid #334155; overflow: hidden; cursor: crosshair; }
+    .ocr-output { font-family: 'Courier New', monospace; color: #10b981; background: #000; white-space: pre-wrap; font-size: 1.1rem; border: 1px solid #1e293b; }
+</style>
+
+<div class="row g-4">
+    {% if error %}
+    <div class="col-12">
+        <div class="alert alert-danger fw-bold border-danger shadow-sm">{{ error }}</div>
+    </div>
+    {% endif %}
+
+    <div class="col-lg-8">
+        <div class="glass-card p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold text-white mb-0">📸 Universal Document Snippet</h5>
+                {% if filename %}
+                <a href="{{ url_for('reset_app') }}" class="btn btn-sm btn-danger fw-bold">🔄 Start New Upload</a>
+                {% endif %}
+            </div>
+
+            {% if not filename %}
+            <form method="POST" enctype="multipart/form-data" class="py-5 text-center border border-dashed rounded-4">
+                <input type="file" name="file" class="form-control bg-dark text-white mb-2" 
+                       accept=".pdf, .png, .jpg, .jpeg, .tiff, .bmp, .webp" required>
+                <div class="text-white-50 small mb-4">
+                    ✅ Supported: <span class="text-warning fw-bold">PDF, PNG, JPG, JPEG, TIFF, BMP</span>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">🚀 Upload Document</button>
+            </form>
+            {% else %}
+            <div class="selection-box">
+                <img id="imageToCrop" src="{{ url_for('uploaded_file', filename=filename) }}" style="max-width: 100%;">
+            </div>
+            <button id="extractBtn" class="btn btn-success btn-lg w-100 mt-3 fw-bold py-3 shadow">⚡ EXTRACT SELECTION</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="glass-card p-4 h-100 d-flex flex-column">
+            <h6 class="text-white-50 small fw-bold mb-3">DOWNLOAD OPTIONS</h6>
+            <div class="d-grid gap-2 mb-4">
+                <form action="/export_excel" method="POST"><button class="btn btn-outline-info w-100 fw-bold">📊 Download as Excel</button></form>
+                <form action="/export_pdf" method="POST"><button class="btn btn-outline-success w-100 fw-bold">📄 Download as PDF</button></form>
+            </div>
+            <h6 class="text-white-50 small fw-bold mb-2">LIVE RESULT</h6>
+            <div id="ocrResult" class="ocr-output p-3 rounded mb-4" style="min-height: 150px;"></div>
+            <h6 class="text-white-50 small fw-bold mb-2">HISTORY</h6>
+            <div id="historyList" class="overflow-auto flex-grow-1" style="max-height: 350px;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+let cropper;
+const image = document.getElementById('imageToCrop');
+if (image) {
+    cropper = new Cropper(image, { viewMode: 1, dragMode: 'crop', autoCrop: false, zoomable: false, movable: false });
+    document.getElementById('extractBtn').addEventListener('click', function() {
+        const data = cropper.getData();
+        fetch('/crop_ocr', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ filename: "{{ filename }}", x: data.x, y: data.y, w: data.width, h: data.height })
+        }).then(res => res.json()).then(data => {
+            document.getElementById('ocrResult').innerText = data.text;
+            document.getElementById('historyList').innerHTML = data.history.map(item => `<div class="p-2 mb-2 bg-dark rounded border-start border-primary border-3 small text-white">${item}</div>`).join('');
+        });
+    });
+}
+</script>
+{% endblock %}

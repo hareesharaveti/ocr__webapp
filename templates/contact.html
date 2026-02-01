@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">OCR Demo (Tesseract)</h2>
+
+<p>
+    Upload an image containing text (PNG or JPG). The backend will run Tesseract through the pytesseract
+    image_to_string function and display the uploaded image and extracted text below. [web:145][web:150]
+</p>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data" class="mb-3">
+    <div class="mb-3">
+        <label for="image" class="form-label">Select image file:</label>
+        <input type="file" class="form-control" id="image" name="image"
+               accept=".png,.jpg,.jpeg" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Run OCR</button>
+</form>
+
+{% if image_filename %}
+<h3 class="mt-4">Uploaded Image</h3>
+<img src="{{ url_for('uploaded_file', filename=image_filename) }}"
+     alt="Uploaded image" class="img-fluid rounded border mb-3">
+{% endif %}
+
+{% if ocr_text %}
+<h3>Extracted Text</h3>
+<pre class="ocr-output">{{ ocr_text }}</pre>
+{% endif %}
+{% endblock %}

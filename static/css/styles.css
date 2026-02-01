@@ -1,0 +1,79 @@
+body {
+    background: linear-gradient(135deg, #1d2671, #c33764);
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.gradient-nav {
+    background: linear-gradient(90deg, #020617, #1d4ed8);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.navbar .nav-link {
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+    color: #facc15;
+}
+
+.main-card {
+    background: rgba(249, 250, 251, 0.95);
+    border-radius: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+h1, h2, h3, h4 {
+    color: #020617;
+    font-weight: 700;
+}
+
+h2.mb-3 {
+    border-left: 6px solid #6366f1;
+    padding-left: 0.75rem;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    border: none;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #4f46e5, #db2777);
+}
+
+.table th {
+    background: #111827;
+    color: #f9fafb;
+}
+
+.ocr-output {
+    background: #020617;
+    color: #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    white-space: pre-wrap;
+    font-family: Consolas, monospace;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+img {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    border-radius: 10px;
+}
+
+.card, img {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover, img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Strengths and Weaknesses of OCR Families</h2>
+
+<h4>Traditional OCR (e.g., Tesseract)</h4>
+<p>
+    Traditional OCR engines are lightweight, easy to deploy on CPU-only environments, and work well on clean
+    printed text for many languages. [web:37][web:57]
+</p>
+<p>
+    They provide limited understanding of document semantics and complex layouts, and typically perform poorly on
+    noisy or handwritten documents without extensive preprocessing. [web:35][web:37][web:73]
+</p>
+
+<h4>Deep Learning OCR (PaddleOCR, EasyOCR, Surya/MMOCR)</h4>
+<p>
+    Deep learning OCR systems better handle scene text, diverse fonts, distortions, and multilingual content than
+    classical engines. [web:40][web:52][web:98]
+</p>
+<p>
+    These models usually require larger dependencies, occasional GPU acceleration, and more complex configuration,
+    increasing deployment complexity compared with traditional OCR. [web:40][web:52][web:98]
+</p>
+
+<h4>Cloud OCR APIs (Google Vision, Azure, Textract)</h4>
+<p>
+    Managed cloud OCR APIs deliver strong accuracy, automatic model updates, and built-in support for handwriting and
+    structured extraction, which make them attractive for enterprise pipelines. [web:35][web:40]
+</p>
+<p>
+    The trade-offs include per-page cost, data residency and privacy concerns, and vendor lock-in for large volumes
+    of sensitive documents. [web:35][web:92]
+</p>
+
+<h4>VLM / VLLM-Based Models</h4>
+<p>
+    Vision-Language Models extend beyond classic OCR by jointly modeling visual content, text tokens, and spatial
+    layout, enabling end-to-end reading, question answering, and summarization over documents. [web:35][web:36][web:93]
+</p>
+<p>
+    Their main limitations are high computational requirements, inference latency, and more complex deployment when
+    compared to lightweight OCR engines or simple cloud APIs. [web:35][web:36][web:41][web:91]
+</p>
+{% endblock %}

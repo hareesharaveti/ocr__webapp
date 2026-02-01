@@ -1,0 +1,11 @@
+flask
+opencv-python-headless
+pytesseract
+numpy
+pillow
+pdf2image
+pymupdf
+pandas
+openpyxl
+reportlab
+gunicorn

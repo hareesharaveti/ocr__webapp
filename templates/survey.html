@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">OCR Tool Survey</h2>
+
+<p>
+    The table below compares traditional open-source OCR engines, deep-learning OCR models, cloud OCR APIs,
+    and VLM-based OCR approaches in terms of strengths, weaknesses, and typical use cases. [web:35][web:37][web:40]
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>OCR System</th>
+        <th>Type</th>
+        <th>Strengths</th>
+        <th>Weaknesses</th>
+        <th>Best Use Cases</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Tesseract</td>
+        <td>Traditional open-source</td>
+        <td>Free, mature, supports over 100 languages, runs on CPU-only systems. [web:37][web:57]</td>
+        <td>Struggles with complex layouts, noisy images, and handwriting. [web:37][web:73]</td>
+        <td>Bulk printed text and simple scanned documents in offline environments. [web:37]</td>
+    </tr>
+    <tr>
+        <td>PaddleOCR</td>
+        <td>Deep learning OCR</td>
+        <td>Good multi-language and layout handling; includes detection and recognition modules. [web:52][web:58]</td>
+        <td>Heavier dependencies and benefits from GPU acceleration. [web:52]</td>
+        <td>Moderately complex documents and multilingual pipelines. [web:40][web:52]</td>
+    </tr>
+    <tr>
+        <td>EasyOCR</td>
+        <td>Scene/deep OCR</td>
+        <td>Simple Python API, supports many languages, handles scene text such as signboards. [web:37][web:40]</td>
+        <td>Limited layout understanding for structured pages. [web:37]</td>
+        <td>Natural images, signboards, and screenshots with simple text regions. [web:37][web:40]</td>
+    </tr>
+    <tr>
+        <td>Surya / MMOCR</td>
+        <td>Structured layout OCR</td>
+        <td>Effective for layout-aware tasks such as tables, forms, and multi-column documents. [web:37][web:40]</td>
+        <td>More complex installation and configuration than basic OCR engines. [web:37]</td>
+        <td>Invoices, forms, and reports with rich layout structure. [web:37][web:40]</td>
+    </tr>
+    <tr>
+        <td>Google Cloud Vision</td>
+        <td>Cloud OCR API</td>
+        <td>High accuracy on printed and handwritten text with strong language coverage. [web:35]</td>
+        <td>Pay-per-use pricing and cloud dependency raise cost and privacy concerns. [web:35]</td>
+        <td>Large-scale production OCR pipelines requiring high accuracy and scalability. [web:35]</td>
+    </tr>
+    <tr>
+        <td>Azure Document Intelligence / AWS Textract</td>
+        <td>Cloud OCR + structure</td>
+        <td>Extracts structured data from forms and documents and integrates with cloud workflows. [web:35]</td>
+        <td>Ongoing API cost and vendor lock-in. [web:35]</td>
+        <td>Enterprise document workflows with complex layouts and form fields. [web:35]</td>
+    </tr>
+    <tr>
+        <td>Qwen2.5-VL / HunyuanOCR (example VLM)</td>
+        <td>VLM/VLLM-based OCR</td>
+        <td>Joint modeling of text, layout, and semantics enables question answering and richer document understanding. [web:35][web:36][web:42]</td>
+        <td>Higher compute requirements and latency than lightweight OCR engines. [web:35][web:36][web:41]</td>
+        <td>High-value use cases where semantic context and layout reasoning are critical. [web:35][web:36]</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Vision-Language Models for Document Reading</h2>
+
+<p>
+    Vision-Language Models treat a document image as multimodal input, combining visual features, text tokens,
+    and spatial layout to perform unified end-to-end reading. [web:35][web:36][web:96]
+</p>
+
+<p>
+    Instead of chaining separate OCR, layout analysis, and NLP components, VLMs can directly answer questions about
+    a page, extract structured fields, or summarize the document from the image alone. [web:36][web:41][web:93]
+</p>
+
+<h4>When VLMs Outperform Conventional OCR</h4>
+<ul>
+    <li>Complex layouts such as tables, forms, and multi-column reports where relationships between fields matter. [web:35][web:36]</li>
+    <li>Semantic tasks including question answering and summarization over documents. [web:36][web:91]</li>
+    <li>Multilingual or noisy documents where contextual reasoning improves robustness. [web:35][web:42]</li>
+</ul>
+
+<h4>Limitations of VLM/VLLM-Based Approaches</h4>
+<ul>
+    <li>High compute cost and GPU memory requirements compared to traditional OCR engines. [web:35][web:36][web:41]</li>
+    <li>Higher latency, which can be problematic for real-time or high-volume workloads. [web:35][web:93]</li>
+    <li>Model size, integration complexity, and potential privacy issues when using third-party model APIs. [web:41][web:92]</li>
+</ul>
+{% endblock %}

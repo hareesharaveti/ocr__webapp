@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-center text-white">
+    <h2 class="fw-bold mb-4">🏆 OCR Algorithm Showdown</h2>
+    <p class="text-white-50">Scientific comparison of 6 different extraction engines against VisionScan AI.</p>
+
+    {% if error %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="alert alert-danger fw-bold border-danger shadow-sm">{{ error }}</div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if not results %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card bg-dark border-secondary p-5">
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" class="form-control bg-dark text-white mb-3" 
+                           accept=".pdf, .png, .jpg, .jpeg, .tiff, .bmp, .webp" required>
+                    <div class="text-white-50 small mb-4">
+                        ✅ Supported: <span class="text-warning fw-bold">PDF, PNG, JPG, JPEG, TIFF, BMP</span>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold">🚀 START BATTLE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    
+    <div class="row mt-4 g-4">
+        {% for res in results %}
+        <div class="col-md-4">
+            <div class="card h-100 bg-dark {% if 'VisionScan' in res.name %}border-success shadow-lg{% else %}border-secondary{% endif %}">
+                <div class="card-header fw-bold d-flex justify-content-between align-items-center 
+                            {% if 'VisionScan' in res.name %}bg-success text-white{% else %}bg-secondary text-light{% endif %}">
+                    <span>{{ res.icon }} {{ res.name }}</span>
+                    <span class="badge bg-black text-white">{{ res.conf }}%</span>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 6px;">
+                        <div class="progress-bar {% if res.conf > 80 %}bg-success{% elif res.conf > 50 %}bg-warning{% else %}bg-danger{% endif %}" 
+                             role="progressbar" style="width: {{ res.conf }}%"></div>
+                    </div>
+                    <textarea class="form-control bg-black text-white-50 small" 
+                              rows="10" readonly style="font-family: monospace; font-size: 0.8rem;">{{ res.text }}</textarea>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="mt-5 mb-5">
+        <a href="/benchmark" class="btn btn-outline-light btn-lg px-5">🔄 Run Another Battle</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

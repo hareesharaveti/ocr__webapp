@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center mb-5">
+    <h1 class="display-5 fw-bold">OCR & Vision-Language Model Survey</h1>
+    <p class="lead text-muted mt-3">
+        A comprehensive study and live demo of Traditional OCR, Deep-Learning OCR,
+        Cloud OCR APIs, and modern Vision-Language Models.
+    </p>
+
+    <div class="mt-4">
+        <a href="{{ url_for('demo') }}" class="btn btn-primary btn-lg me-2">
+            Try OCR Demo
+        </a>
+        <a href="{{ url_for('survey') }}" class="btn btn-outline-dark btn-lg">
+            View OCR Survey
+        </a>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <h4>📄 Traditional OCR</h4>
+        <p class="text-muted">Fast, offline engines like Tesseract.</p>
+    </div>
+    <div class="col-md-4">
+        <h4>🤖 Deep Learning OCR</h4>
+        <p class="text-muted">Better handling of complex layouts.</p>
+    </div>
+    <div class="col-md-4">
+        <h4>🧠 VLM / VLLM</h4>
+        <p class="text-muted">End-to-end document understanding.</p>
+    </div>
+</div>
+
+{% endblock %}

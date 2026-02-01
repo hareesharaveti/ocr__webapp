@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Recommendations for Real-World Scenarios</h2>
+
+<p>
+    Based on reported benchmarks and the capabilities of different OCR families, the following setups are suitable
+    starting points for common deployment scenarios. [web:35][web:37][web:40]
+</p>
+
+<ul>
+    <li>
+        <strong>High-accuracy enterprise pipelines:</strong>
+        Use cloud OCR platforms such as Google Cloud Vision, Azure Document Intelligence, or AWS Textract,
+        optionally combined with VLM-based models for semantic tasks and document question answering. [web:35][web:36]
+    </li>
+    <li>
+        <strong>Low-resource / offline use:</strong>
+        Choose lightweight open-source engines such as Tesseract or similar CPU-friendly OCR tools, with simple
+        image preprocessing to improve accuracy. [web:37][web:57]
+    </li>
+    <li>
+        <strong>Complex layout documents:</strong>
+        Combine layout-aware OCR frameworks like Surya/MMOCR or cloud document AI with post-processing, and
+        consider VLMs when relationships between fields are critical. [web:36][web:40]
+    </li>
+    <li>
+        <strong>Handwritten text:</strong>
+        Prefer cloud OCR APIs with handwriting support or specialized handwriting OCR models, using VLMs when
+        higher-level reasoning over handwritten content is required. [web:35][web:40]
+    </li>
+</ul>
+
+<p>
+    In many real-world systems, a hybrid design that pairs fast classical OCR with VLM-based models for
+    high-value or ambiguous documents offers a practical balance between accuracy, cost, and latency. [web:35][web:36][web:91]
+</p>
+{% endblock %}
